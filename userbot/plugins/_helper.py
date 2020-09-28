@@ -1,14 +1,15 @@
-# Ported from other Telegram UserBots for TeleBot
-# Kangers, don't remove this line 
-# @its_xditya
+from os import system as cmd
+from time import sleep as s
 
-from userbot import CMD_LIST
-from userbot import ALIVE_NAME
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+from userbot import CHROME_DRIVER, CMD_LIST, GOOGLE_CHROME_BIN
 from userbot.utils import admin_cmd
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Ninja Userbot User"
 
-@borg.on(admin_cmd(pattern="help ?(.*)"))
+@command(pattern="^.help ?(.*)")
+# @borg.on(admin_cmd(pattern=r"help ?(.*)"))
 async def cmd_list(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
         tgbotusername = Var.TG_BOT_USER_NAME_BF_HER
@@ -30,30 +31,26 @@ async def cmd_list(event):
                         force_document=True,
                         allow_cache=False,
                         caption="**COMMANDS**",
-                        reply_to=reply_to_id
+                        reply_to=reply_to_id,
                     )
                     await event.delete()
             else:
                 await event.edit(string)
         elif input_str:
             if input_str in CMD_LIST:
-                string = "**Commands available in {}** \n\n".format(input_str)
+                string = "Commands found in {}:".format(input_str)
                 for i in CMD_LIST[input_str]:
                     string += "    " + i
                     string += "\n"
-                string +="\n**© Ninja Userbot**"
                 await event.edit(string)
             else:
                 await event.edit(input_str + " is not a valid plugin!")
         else:
-            help_string = f"""`Userbot Helper for {DEFAULTUSER} to reveal all the commands of `\n\n"""
+            help_string = """Userbot Helper.. \nProvided by [Ninja Userbot](https://github.com/ninjanaveen/NinjaUserbot)\n`Userbot Helper to reveal all the commands`"""
             results = await bot.inline_query(  # pylint:disable=E0602
-                tgbotusername,
-                help_string
+                tgbotusername, help_string
             )
             await results[0].click(
-                event.chat_id,
-                reply_to=event.reply_to_msg_id,
-                hide_via=True
+                event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True
             )
             await event.delete()
