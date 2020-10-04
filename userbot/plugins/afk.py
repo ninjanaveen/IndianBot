@@ -55,7 +55,7 @@ async def _(event):
         await event.delete()
         try:
             await borg.send_message(  # pylint:disable=E0602
-                Config.PRIVATE_GROUP_BOT_API_ID,  # pylint:disable=E0602
+                Config.PLUGIN_CHANNEL,  # pylint:disable=E0602
                 f"Set AFK mode to True, and Reason is {reason}"
             )
         except Exception as e:  # pylint:disable=C0103,W0703
@@ -78,7 +78,7 @@ async def set_not_afk(event):
         shite = await borg.send_message(event.chat_id, "__Gay is Beck alive!__\n**Ninja is No Longer afk.**\n `Gey Was afk for:``" + total_afk_time + "`")
         try:
             await borg.send_message(  # pylint:disable=E0602
-                Config.PRIVATE_GROUP_BOT_API_ID,  # pylint:disable=E0602
+                Config.PLUGIN_CHANNEL,  # pylint:disable=E0602
                 "Set AFK mode to False"
             )
         except Exception as e:  # pylint:disable=C0103,W0703
