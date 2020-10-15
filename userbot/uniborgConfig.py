@@ -69,6 +69,10 @@ if ENV:
         MONGO_URI = os.environ.get("MONGO_URI", None)
         LYDIA_API = os.environ.get("LYDIA_API",None)
         PLUGIN_CHANNEL = int(os.environ.get("PLUGIN_CHANNEL", False))
+        FBAN_GROUP_ID = os.environ.get("FBAN_GROUP_ID", None)
+        if FBAN_GROUP_ID:
+            FBAN_GROUP_ID = int(FBAN_GROUP_ID)
+        EXCLUDE_FED = os.environ.get("EXCLUDE_FED", None)
 else:
     class Config(object):
         DB_URI = None
